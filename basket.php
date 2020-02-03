@@ -19,6 +19,8 @@ if($value != null){
 	unset($_SESSION['basket'][$value]);
 }
 
+
+
 //if the value of the posted id is set
 if (isset($_POST['h_prodid'])){
 		//
