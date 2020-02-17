@@ -1,42 +1,43 @@
 <?php
-include ("db.php");							//include db.php file to connect to DB
+//version 1.4
+include("db.php");
+$pagename="Make Your Home Smart";
+//session_start(); //Creates  New session
 
-$pagename="Make your home smart";				//create and populate variable called $pagename
+//Head Of the Page
 echo "<link rel=stylesheet type=text/css href=mystylesheet.css>";
 echo "<title>".$pagename."</title>";
-
 echo "<body>";
-include ("headfile.html");
+include ("headfile.html");	     //Calls HTML file that displays header
 echo "<h4>".$pagename."</h4>";
+//----------------------- WEBPAGE CODE STARTS HERE -----------------------------
 
-//create a $SQL variable and populate it with a SQL statement that retrieves product details
-$SQL="select prodId, prodName, prodPicNameSmall, prodDescripShort, prodPrice from Product";
-//run SQL query for connected DB or exit and display error message
+$SQL="select prodId, prodName, prodPicNameSmall, prodDescripShort, prodPrice
+			from Product";
 $exeSQL=mysqli_query($conn, $SQL) or die (mysqli_error());
 
 echo "<table style='border: 0px'>";
 //create an array of records (2 dimensional variable) called $arrayp.
 //populate it with the records retrieved by the SQL query previously executed.
-//Iterate through the array i.e while the end of the array has not been reached, run through it
+//Iterate through the array i.e while the end of the array has not been reached
+// run through it
 while ($arrayp=mysqli_fetch_array($exeSQL))
 {
 	echo "<tr>";
 	echo "<td style='border: 0px'>";
-	//display the small image whose name is contained in the array
-	//
-	// LINK TO THE IMAGE
 	echo "<a href=prodbuy.php?u_prod_id=".$arrayp['prodId'].">";
 	echo "<img src=images/".$arrayp['prodPicNameSmall']." height=200 width=200>";
-	echo "</a>";
-
 	echo "</td>";
 	echo "<td style='border: 0px'>";
 	echo "<p><h5>".$arrayp['prodName']."</h5>";
-	echo "<p>".$arrayp['prodDescripShort']."</p>";	//display product name as contained in the array
-	echo "<p><b>£".$arrayp['prodPrice']."</b></p>";	//display product name as contained in the array
+	echo "</a>";
+	echo "<p>".$arrayp['prodDescripShort']."</p>";	
+	echo "<p><b>£".$arrayp['prodPrice']."</b></p>";
 	echo "</td>";
 }
 echo "</table>";
-include ("footfile.html");
+
+//----------------------- WEBPAGE CODE STARTS HERE -----------------------------
+include("footfile.html");					  //Calls HTML File that displays footer
 echo "</body>";
 ?>

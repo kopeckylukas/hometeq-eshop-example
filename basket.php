@@ -1,48 +1,45 @@
 <?php
-
-//version 1.3
-  session_start();
-//Tut 04: pseudo code and snippets of code for basket.php
-
-//Header and procedures
+//version 1.4
 include("db.php");
 $pagename="Smart Basket";
+session_start(); //Creates  New session
+
+//Head Of the Page
 echo "<link rel=stylesheet type=text/css href=mystylesheet.css>";
 echo "<title>".$pagename."</title>";
 echo "<body>";
-include ("headfile.html");
+include ("headfile.html");	     //Calls HTML file that displays header
 echo "<h4>".$pagename."</h4>";
-//-----This section updates the session array and therefore the basket if a product has been selected ------
+//----------------------- WEBPAGE CODE STARTS HERE -----------------------------
 
+//Function which deletes single record from  basket
 $value = $_POST['removal'];
 if($value != null){
 	unset($_SESSION['basket'][$value]);
 }
 
-
-
-//if the value of the posted id is set
+//function which checks if user is adding new item into the basket
 if (isset($_POST['h_prodid'])){
-		//
-		$newprodid=$_POST['h_prodid'];									//capture the posted id of selected product (hidden field) using $_POST and store it into a local variable $newprodid
-		$prodquantity = $_POST['p_quantity'];						//capture the posted quantity of selected product (drop down list) using $_POST and store it into a local variable $prodqu
-	  //echo "<p>Selected product Id: ".$newprodid;		//displays ID
-		//echo "<p>Product Quantity: ".$prodquantity;		//dispalys Quantity
-		//create a new cell in your session array $_SESSION['basket'
-		$_SESSION['basket'][$newprodid]=$prodquantity;  //by indexing the cell with the id and storing the quantity inside the cell
-		echo "<p> 1 item added to the basket</p>"; 					//Display "1 item added to the basket " message
+		//captures value from PRODBUY page
+		$newprodid=$_POST['h_prodid'];
+		$prodquantity = $_POST['p_quantity'];
+	  //updating season array
+		$_SESSION['basket'][$newprodid]=$prodquantity;
+    //displays statemtne that one iten has been added in the basket
+		echo "<p> 1 item added to the basket</p>";
 }else{
-		echo "<p> Current basket unchanged</p>";						//Display "Current basket unchanged " message
-		//$_SESSION['basket']=null;
+    //displays statement that basket has been uncanged
+		echo "<p> Current basket unchanged</p>";
 }
-//----------------------------------------------------------------------------------------
+
 //-----This section reads from the session array and dosplays the content of the basket ------
 
 
 
-//if the session array $_SESSION['basket'] is set
+//if array is set, it's contetnt will be displayed
 if (isset($_SESSION['basket'])){
-		echo "<table style='border: 0px'>";	//Create a HTML table with a header to display the content of the shopping basket
+  //creates table
+	echo "<table style='border: 0px'>";
 		echo "<tr>";
 			echo "<th>Product Name</th>";
 			echo "<th>Price</th>";
@@ -63,7 +60,7 @@ $total=0;
 					echo "<td>".$arrayp['prodName']."</td>";
 					echo "<td>&pound;".$arrayp['prodPrice']."</td>";
 					echo "<td>".$quantity."</td>";
-					echo "<td>&pound;".$subtotal."</td>";
+					echo "<td>&pound;".number_format($subtotal,2)."</td>";
 
 					echo "<form action=basket.php method=post>";
 
@@ -85,14 +82,14 @@ $total=0;
 
 	echo "<p><h3><a href='clearbasket.php'>Delete basket</a></h3>";
 
-	echo "<p><h3>New homteq customer: <a href='singup.php'>Sing-up</a></h3>";
+	echo "<p><h3>New homteq customer: <a href='signup.php'>Sing-up</a></h3>";
 	echo "<p><h3>Returning hometeq customer: <a href='login.php'>Log-in</a></h3>";
 
 }else{
 	echo "<p><h1>Your Basket is currently empty</h1>";
 }
 
-include("footfile.html");					//include head layout
+//----------------------- WEBPAGE CODE STARTS HERE -----------------------------
+include("footfile.html");					  //Calls HTML File that displays footer
 echo "</body>";
-
 ?>
