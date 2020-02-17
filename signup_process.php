@@ -36,7 +36,7 @@ if (empty($userFName) || empty($userSName) || empty($userAddress) ||
       echo "<p>Your passwords do not match<br>
             Make sure your Password is same as Confirsm Password";
       echo "<p> Go back to <a href = 'signup.php'>sign up</a></p>";
-    }elseif(!preg_match('/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,3})$/', $userEmail)){
+    }elseif(!preg_match('/^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,3})$/', $userEmail)){
       echo "<p><b>Sign-up failed</b></p>";
       echo "<p>Email is not valid<br>
             Make sure you enter correct email address";
