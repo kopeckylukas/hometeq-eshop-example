@@ -2,12 +2,13 @@
 //Version 1.2
 
 $pagename="homteq:  app and cloud controlled tech for your home";
-
+session_start(); //Creates  New session
 //Head Of the Page
 echo "<link rel=stylesheet type=text/css href=mystylesheet.css>";
 echo "<title>".$pagename."</title>";
 echo "<body>";
 include ("headfile.html");	     //Calls HTML file that displays header
+include ("detectlogin.php");
 echo "<h4>".$pagename."</h4>";
 //----------------------- WEBPAGE CODE STARTS HERE -----------------------------
 

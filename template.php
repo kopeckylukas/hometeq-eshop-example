@@ -2,12 +2,13 @@
 //Version 2.0
 //include("db.php"); //Inclue only if SQL needed
 $pagename="Make your home smart";
-
+session_start();
 //Head Of the Page
 echo "<link rel=stylesheet type=text/css href=mystylesheet.css>";
 echo "<title>".$pagename."</title>";
 echo "<body>";
 include ("headfile.html");	     //Calls HTML file that displays header
+include ("detectlogin.php");
 echo "<h4>".$pagename."</h4>";
 //----------------------- WEBPAGE CODE STARTS HERE -----------------------------
 

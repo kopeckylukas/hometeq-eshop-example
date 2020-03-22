@@ -9,6 +9,7 @@ echo "<link rel=stylesheet type=text/css href=mystylesheet.css>";
 echo "<title>".$pagename."</title>";
 echo "<body>";
 include ("headfile.html");	     //Calls HTML file that displays header
+include ("detectlogin.php");
 echo "<h4>".$pagename."</h4>";
 //----------------------- WEBPAGE CODE STARTS HERE -----------------------------
 
@@ -70,6 +71,8 @@ $total=0;
 					echo "</form>";
 				echo "</tr>";
 				$total+=$subtotal;
+				$_SESSION['orderTotal']=$total;
+
 			}
 		}
 	}
@@ -80,14 +83,22 @@ $total=0;
 	echo "</tr>";
 	echo "</table>";
 
+
 	echo "<p><h3><a href='clearbasket.php'>Delete basket</a></h3>";
-
-	echo "<p><h3>New homteq customer: <a href='signup.php'>Sing-up</a></h3>";
-	echo "<p><h3>Returning hometeq customer: <a href='login.php'>Log-in</a></h3>";
-
+	if (isset($_SESSION['userid'])){
+			echo "<p><h3>Continue to <a href='checkout.php'>Checkout</a></h3>";
+	}else{
+		if($_SESSION['userid']){
+			echo "<p><h3>To finalise your order, please,: <a href='checkout.php'>Check-out</a></h3>";
+		}else{
+			echo "<p><h3>New homteq customer: <a href='signup.php'>Sing-up</a></h3>";
+			echo "<p><h3>Returning hometeq customer: <a href='login.php'>Log-in</a></h3>";
+		}
+	}
 }else{
 	echo "<p><h1>Your Basket is currently empty</h1>";
 }
+//echo "<p>sessionTotal ".$_SESSION['orderTotal'];
 
 //----------------------- WEBPAGE CODE STARTS HERE -----------------------------
 include("footfile.html");					  //Calls HTML File that displays footer

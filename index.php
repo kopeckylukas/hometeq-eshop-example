@@ -2,15 +2,17 @@
 //version 1.4
 include("db.php");
 $pagename="Make Your Home Smart";
-//session_start(); //Creates  New session
+session_start(); //Creates  New session
 
 //Head Of the Page
 echo "<link rel=stylesheet type=text/css href=mystylesheet.css>";
 echo "<title>".$pagename."</title>";
 echo "<body>";
 include ("headfile.html");	     //Calls HTML file that displays header
+include ("detectlogin.php");
 echo "<h4>".$pagename."</h4>";
 //----------------------- WEBPAGE CODE STARTS HERE -----------------------------
+
 
 $SQL="select prodId, prodName, prodPicNameSmall, prodDescripShort, prodPrice
 			from Product";
@@ -31,7 +33,7 @@ while ($arrayp=mysqli_fetch_array($exeSQL))
 	echo "<td style='border: 0px'>";
 	echo "<p><h5>".$arrayp['prodName']."</h5>";
 	echo "</a>";
-	echo "<p>".$arrayp['prodDescripShort']."</p>";	
+	echo "<p>".$arrayp['prodDescripShort']."</p>";
 	echo "<p><b>£".$arrayp['prodPrice']."</b></p>";
 	echo "</td>";
 }
