@@ -1,6 +1,6 @@
 CREATE TABLE Product (
   prodId            INT(4) NOT NULL AUTO_INCREMENT,
-  prodName          VARCHAR(30) NOT NULL,
+  prodName          VARCHAR(30) Unique NOT NULL,
   prodPicNameSmall  VARCHAR(100) NOT NULL,
   prodPicNameLarge  VARCHAR(100) NOT NULL,
   prodDescripShort  VARCHAR(1000),

@@ -32,6 +32,7 @@ if (empty($logEmail) || empty($logPassword)){
   WHERE userEmail LIKE '$logEmail'";
   $exeSQL=mysqli_query($conn, $SQL) or die (mysqli_error());
   $arrayp=mysqli_fetch_array($exeSQL);
+
   if($logPassword!=$arrayp['userPassword']){
     echo "<p><b>Log-in failed</b></p>";
     echo "<p>Email or password has not been recognised <br>
@@ -39,15 +40,23 @@ if (empty($logEmail) || empty($logPassword)){
     echo "<p> Go back to <a href = 'login.php'>log in</a></p>";
   }else{
     echo "<p><b>Log-in success</b></p>";
-    $_SESSION['userid']=$arrayp['userId'];
-    $_SESSION['userType']=$arrayp['userType'];
     $_SESSION['fname']=$arrayp['userFName'];
     $_SESSION['sname']=$arrayp['userSName'];
-    echo "<p>Hello ".$_SESSION['fname']."".$_SESSION['sname']."</p>";
-    echo "<p>Continue shopping for <a href='index.php'>Home Tech</a></p>";
-    echo "<p>View your <a href='basket.php'>Smart Basket</a></p>";
+    $_SESSION['userid']=$arrayp['userId'];
+    if($arrayp['userType']=='a'||$arrayp['userType']=='A'){
+      $_SESSION['userType']='Administrator';
+      echo "<p>Hello ".$_SESSION['fname']." ".$_SESSION['sname']."</p>";
+      echo "<p>You are Signed in as Administrator</p>";
+      echo "<p>Continue shopping for <a href='index.php'>Home Tech</a></p>";
+    }
+    if($arrayp['userType']=='c'||$arrayp['userType']=='C'){
+      $_SESSION['userType']='Custormer';
+      echo "<p>Hello ".$_SESSION['fname']." ".$_SESSION['sname']."</p>";
+      echo "<p>You are Signed in as Customer</p>";
+      echo "<p>Continue shopping for <a href='index.php'>Home Tech</a></p>";
+      echo "<p>View your <a href='basket.php'>Smart Basket</a></p>";
+    }
   }
-
 }
 
 //----------------------- WEBPAGE CODE STARTS HERE -----------------------------

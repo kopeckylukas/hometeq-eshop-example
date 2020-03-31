@@ -3,7 +3,7 @@
 //version 1.4
 include("db.php");
 $pagename="A smart buy for smart home";
-//session_start(); //Creates  New session
+session_start(); //Creates  New session
 
 //Head Of the Page
 echo "<link rel=stylesheet type=text/css href=mystylesheet.css>";
